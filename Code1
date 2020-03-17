@@ -1,0 +1,579 @@
+1.Write a java program to create an abstract class named Shape that contain an empty method named numberOfSides() and area(). Provide three classes named Trapezoid, Triangle and Hexagon such that each one of the classes extends the class Shape. Each one of the class contains only the method numberOfSides() that shows the number of sides in the given geometrical figures.
+Program:
+import java.util.*;
+//Creating abstract class of shape
+abstract class Shape {
+	// Creating abstract method of numberofSides
+	public abstract void  numberOfSides();
+	// Creating abstract method of area
+	public abstract void area();
+}
+// Creating a class Trapezoid which extends the shape class
+class Trapezoid extends Shape {
+	int side = 4;
+	float area;
+	@Override
+	// Implementing abstract method of numberOfSides
+	public void  numberOfSides() {
+		System.out.println("Sides for Trapezoid is :" + side);
+	}
+	@Override
+	// Implementing abstract method of area
+	public void area() {
+		Scanner in = new Scanner(System.in);
+		// Taking values from console
+		System.out.println("Enter Longbase for Trapezoid");
+		int longbase=in.nextInt();
+		System.out.println("Enter Shortbase for Trapezoid");
+		int shortbase=in.nextInt();
+		System.out.println("Enter height for Trapezoid");
+		int height=in.nextInt();
+		// Calculating area
+		area =(float) ((longbase+shortbase)/2)*height;
+		System.out.println("Area of a Trapezoid is:" + area);
+		in.close();
+	}
+}
+// Creating a class Triangle which extends the shape class
+class Triangle extends Shape {	
+	float area;
+	int side = 3;
+	@Override
+	// Implementing abstract method of numberOfSides
+	public void  numberOfSides() {
+		System.out.println("Sides for Triangle is:" + side);
+	}
+	@Override
+	// Implementing abstract method of area
+	public void area() {
+		Scanner in=new Scanner(System.in);   // Taking values from console
+		System.out.println("Enter Breath of the triangle :");
+		int breadth = in.nextInt();
+		System.out.println("Enter Height of the triangle :");
+		int height = in.nextInt();
+		// Calculating area
+		area =(float) (breadth*height)/2;
+		System.out.println("Area of a Triangle is:" + area);
+		in.close();
+	}
+}
+
+// Creating a class Hexagon which extends the shape class
+class Hexagon extends Shape {
+	int side = 6;
+	float area;
+	@Override
+	// Implementing abstract method of numberOfSides
+	public void  numberOfSides() {
+		System.out.println("Sides of Hexagon is:" + side);
+	}
+	@Override
+	// Implementing abstract method of area
+	public void area() {
+		// Calulating area
+		area = (float) (3 * Math.sqrt(3) * (side * side)) / 2;
+		System.out.println("Area of a Hexagon is:" + area);
+	}
+}
+public class Area {
+	public static void main(String[] args) {
+		// For choosing options
+		System.out.println("1.Trapezoid");
+		System.out.println("2.Triangle");
+		System.out.println("3.Hexagon");
+		Scanner in = new Scanner(System.in);  // Scanner class
+		System.out.println("Select Option");
+		int op=in.nextInt();  // Storing the number in op
+		switch(op)  // switch case to execute selected option
+		{
+		case 1:
+		{
+			// creating object for the Trapezoid class
+			Shape tz = new Trapezoid();
+			// Calling Trapezoid class methods by using object of that class
+			tz. numberOfSides();
+			tz.area();
+			break;
+		}
+		case 2:
+		{
+			// creating object for the Triangle class
+			Shape t = new Triangle();
+			// Calling Triangle class methods by using object of that class
+			t. numberOfSides();
+			t.area();
+			break;
+		}
+		case 3:
+		{
+
+			// creating object for the Hexagon class
+			Shape h = new Hexagon();
+			// Calling Hexagon class methods by using object of that class
+			h. numberOfSides();
+			h.area();
+			break;
+		}
+		default:  // if it is not in given cases
+		{
+			System.out.println("Choose correct option");
+		}
+
+		}
+		in.close();  // Scanner class closing
+	}
+}
+
+
+
+
+
+
+
+Output:
+    
+2. A class Connection maintains attributes database url, user name and password. Class needs to maintain the number of count of Connection class. Every time a connection object is created the count must be incremented and every time it is set to null count must be decremented and object must be garbage collected explicitly by the code. At any point, there must be only 10 connection object in the memory. Write a java class to achieve this.
+Program:
+//Correct code to count number 
+//of employees excluding interns. 
+class connection
+{ 
+
+	private String Databaseurl; 
+	private String username; 
+	private String password;
+	private int ID; 
+	private static int nextId=1; 
+	//it is made static because it 
+	// is keep common among all and 
+	// shared by all objects 
+	public connection(String Databaseurl,String username,String password) 
+	{ 
+		this.Databaseurl=Databaseurl;
+		this.username=username;
+		this.password=password;
+		this.ID = nextId++; 
+	} 
+	public void show() 
+	{ 
+		System.out.println("Id="+ID+"\nDATABASEURL="+Databaseurl+"\nUSERNAME="+username+"\npassword="+password); 
+	} 
+	public void showNextId() 
+	{ 
+		System.out.println("Next connection id will be="+nextId); 
+	} 
+	protected void finalize() 
+	{ 
+		--nextId;  
+		//In this case, 
+		//gc will call finalize()  
+		//for 2 times for 2 objects. 
+	} 
+} 
+
+//it is closing brace of Employee class 
+public class Second
+{ 
+	public static void main(String []args) 
+	{ 
+		connection E=new connection("www.Google.com","abcd","12345"); 
+		connection F=new connection("www.Facebook.com","efgh","67890"); 
+		connection G=new connection("www.Gmail.com","ijkl","85209"); 
+		E.show(); 
+		F.show(); 
+		G.show(); 
+		{  
+			//It is sub block to keep 
+			connection X=new connection("www.flipkart.com","mnop","06787"); 
+			connection Y=new connection("www.hcl.com","qrst","12345678"); 
+			X.show(); 
+			Y.show(); 
+			X.showNextId();
+			X = Y = null; 
+			System.gc();  
+			System.runFinalization(); 
+		}  
+	} 
+}
+Output:
+ 
+3. Create a class that represents a time in the form of hours, minutes and seconds. Accept the time parameters from the user in the form of a. hours, minutes and seconds 
+b. hh:mm:ss 
+-Only valid time must be allowed to be created. 
+-Display the time in the form of hh:mm:ss.
+Program:
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Scanner;
+public class Time {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		DateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
+		System.out.println("Enter the time in the format of hh:mm:ss");
+		String str=in.nextLine();  // Takes the given time in str
+		String[] str_arr=str.split(":");  // String split method to separate the given the date
+		if(str_arr.length==3){  // Checks the condition
+			int hour =Integer.parseInt(str_arr[0]);  // takes the str[0] to the hours variable
+			int minute =Integer.parseInt(str_arr[1]);  // takes the str[1] to the minutes variable
+			int second =Integer.parseInt(str_arr[2]);  // takes the str[2] to the seconds variable
+			if(hour<=23&&minute<60&&second<60){
+				Calendar cal = Calendar.getInstance();
+				cal.set(Calendar.HOUR_OF_DAY, hour);
+				cal.set(Calendar.MINUTE, minute);
+				cal.set(Calendar.SECOND, second);
+				System.out.println(dateformat.format(cal.getTime()));
+			}
+			else{
+				if(hour>23|hour<0)
+					System.out.println("enter valid hour between 0-23  you entered "+hour);
+				if(minute>=60|minute<0)
+					System.out.println("enter valid minute between 0-59  you entered "+minute);
+				if(second>=60|second<0)
+					System.out.println("enter valid second between 0-59 but you entered "+second);
+			}
+		}else{
+			System.out.println("enter the all values seperated by ':' you entered"+str);
+		}
+		in.close();
+	}
+}
+
+
+Output:
+  
+4. Create a class Employee that stores data about employee consisting of name, employee code , gender, location (East, West, North, South). Whenever new employee object is created, employee code is automatically generated. The employee code is a combination of the first letter of the location and sequence number. The sequence number start from 0001 and is incremented till 9999, after which the application must generate an error. 
+Write a test program to demonstrate all the capabilities.
+Program:
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+class Employee {
+	private String name;
+	private String code;
+	private String gender;
+	private String location;
+	private static int num=0;
+	// creating constructor
+	public Employee(String name, String gender, String location) {
+		this.name = name;  // Assigning the given data to variables using this keyword
+		this.code = generateCode(location);  
+		this.gender = gender;
+		this.location = location;
+	}
+	public String generateCode(String location){
+		char local=location.charAt(0);  // takes 1st letter of the location
+		++num;  // incrementing number
+		String zeros = null;  
+		String generator=null;
+		if(num>0&&num<10)  //Checks the condition and executes the code and assigned the zeros
+			zeros="000";
+		else if(num>10)
+			zeros="00";
+		else if(num>100&&num<1000)
+			zeros="0";
+		else
+			System.out.println("the employees generated are beyond limit");
+		if(num<1000){
+			generator=local+zeros+num;  // takes 1st letter of the location and zeros and number
+		}
+		return generator;  // cobination of the 1st letter of the location and zeros and number is returned
+	}
+
+
+	@Override
+	public String toString() {  // returns the details of the employee
+		return "Employee [name=" + name + ", code=" + code + ", gender=" + gender + ", location=" + location + "]";
+	}
+}
+public class EmployeeMain {
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		ArrayList <Employee> employes=new ArrayList<Employee>();
+		char ch='y';
+		// checking the condition and enters into the loop
+		while (ch=='y'||ch=='Y'){
+			System.out.println("enter employee name");  
+			String name=br.readLine();  // takes name of the employee
+			System.out.println("enter employee gender");
+			String gender=br.readLine();  // takes gender
+			System.out.println("enter employee location such as (north south east west)");
+			String location=br.readLine();  // takes location
+			Employee emp=new Employee(name,gender,location);  // calling constructor
+			employes.add(emp);
+			System.out.println("enter yes or no for adding another employee(y/n)");
+			ch=br.readLine().charAt(0); // takes y/n from console
+		}
+		for(Employee emp:employes){  // printing the employee details
+			System.out.println(emp.toString());
+		}
+	}
+}
+Output:
+ 
+
+5. Write a java program to create an immutable class and create a test program to use the services of the class.
+Program:
+//immutable class 
+final class Student 
+{ 
+	final String name; 
+	final int regNo; 
+
+	public Student(String name, int regNo) 
+	{ 
+		this.name = name; 
+		this.regNo = regNo; 
+	} 
+	public String getName() 
+	{ 
+		return name; 
+	} 
+	public int getRegNo() 
+	{ 
+		return regNo; 
+	} 
+} 
+
+public class ImmutableClass
+{ 
+	public static void main(String args[]) 
+	{ 
+		Student s = new Student("Girish", 123); 
+		System.out.println(s.getName()); 
+		System.out.println(s.getRegNo()); 
+
+		// Uncommenting below line causes error 
+		//s.regNo = 102; 
+	} 
+} 
+Output:
+  
+
+6. Different banks use different methods to calculate inrerest. Create a parent class named Bank with one abstract method called calculate_Interest() and derive SBI, HDFC and BOB classes with necessary members added to these classes. Using dynamic method dispatch concept create minimum one object for each derive class and print the customer information. use the following to calculate the new balance: new_balance=balance+interest.
+Program:
+import java.util.Scanner;
+class Bank{  
+	float getRateOfInterest(){return 0;}  
+}  
+class SBI extends Bank{  
+	float getRateOfInterest(){
+		return 8.4f;}  
+}  
+class HDFC extends Bank{  
+	float getRateOfInterest(){return 7.3f;}  
+}  
+class BOB extends Bank{  
+	float getRateOfInterest(){return 9.7f;}  
+}  
+class BankMain{  
+	public static void main(String args[]){  
+		Scanner in =new Scanner(System.in);  // Scanner Class
+		// Taking inputs from console
+		System.out.println("ENTER ACCOUNT NUMBER");
+		int acc_num=in.nextInt();
+		System.out.println("ENTER ACCOUNT HOLDER NAME");
+		String acc_hname=in.next();
+		System.out.println("ENTER BANK NAME");
+		String b_name=in.next();
+		System.out.println("ENTER TRANCTION TYPE ");
+		String tran_type=in.next();
+		System.out.println("ENTER TRANSACTION AMOUNT");
+		int tran_amnt=in.nextInt();
+		System.out.println("ENTER BALANCE  AMOUNT");
+		int bal_amnt=in.nextInt();
+		// Creating Object for SBI
+		Bank S=new SBI();  
+		System.out.println("SBI Rate of Interest: "+S.getRateOfInterest()); 
+		// Creating Object for HDFC
+		Bank H=new HDFC();  
+		System.out.println("HDFC Rate of Interest: "+H.getRateOfInterest());
+		//Creating Object for BOB
+		Bank B=new BOB();  
+		System.out.println("BOB Rate of Interest: "+B.getRateOfInterest()); 
+		// Printing Details
+		System.out.println("ACCOUNT NUMBER:"+acc_num);
+		System.out.println("ACCOUNT HOLDER NAME:"+acc_hname);
+		System.out.println("BANK NAME:"+b_name);
+		System.out.println("TRANCTION TYPE :"+tran_type);
+		System.out.println("TRANSACTION AMOUNT:"+tran_amnt);
+		System.out.println("BALANCE  AMOUNT:"+bal_amnt);
+		
+		if(b_name.equalsIgnoreCase("SBI")) // Checking Condition
+		{
+			float intrst=(bal_amnt/S.getRateOfInterest());   // Calculating interest
+			// Printing Interest and New Balance
+			System.out.println("INTEREST AMOUNT:"+intrst); 
+			double amnt=0;
+			if (tran_type.equalsIgnoreCase("withdrawal")) { // checking for withdrawal or not
+				if (tran_amnt <= bal_amnt) {
+					amnt = bal_amnt - tran_amnt;
+
+				} else {
+					System.out.println("invaid transaction");
+				}
+			}
+			if (tran_type.equalsIgnoreCase("deposit")) { // checking for deposit or not
+				amnt = bal_amnt + tran_amnt;
+			}
+			System.out.println("NEW BALACE:"+(amnt));
+		}
+		else if(b_name.equalsIgnoreCase("HDFC"))   // Checking Condition
+		{
+			// Printing Interest and New Balance
+			float intrst=(bal_amnt/H.getRateOfInterest());  // Calculating interest
+			System.out.println("INTEREST:"+intrst);  			
+			double amnt=0;
+			if (tran_type.equalsIgnoreCase("withdrawal")) { // checking for withdrawal or not
+				if (tran_amnt <= bal_amnt) {
+					amnt = bal_amnt - tran_amnt;
+
+				} else {
+					System.out.println("invaid transaction");
+				}
+			}
+			if (tran_type.equalsIgnoreCase("deposit")) { // checking for deposit or not
+				amnt = bal_amnt + tran_amnt;
+			}
+			System.out.println("NEW BALACE:"+(amnt));
+		}
+		else if(b_name.equalsIgnoreCase("BOB"))  // Checking Condition
+		{
+			float intrst=(bal_amnt/B.getRateOfInterest());  // Calculating interest
+			// Printing Interest and New Balance
+			System.out.println("INTEREST:"+(intrst));
+			double amnt=0;
+			if (tran_type.equalsIgnoreCase("withdrawal")) { // checking for withdrawal or not
+				if (tran_amnt <= bal_amnt) {
+					amnt = bal_amnt - tran_amnt;
+
+				} else {
+					System.out.println("invaid transaction");
+				}
+			}
+			if (tran_type.equalsIgnoreCase("deposit")) { // checking for deposit or not
+				amnt = bal_amnt + tran_amnt;
+			}
+			System.out.println("NEW BALACE:"+(amnt));
+		}
+		in.close();  // closing Scanner class
+	}
+}
+
+
+
+
+
+
+
+Output:
+ 
+7&8. Write a java program to demonstrate this and super keywords. In this problem we have given you three classes in the editor:
+Student class
+Trainer class
+HCL class
+In the main method, we populated an ArrayList with several instances of these classes. count method calculates how many instances of each type is present in the ArrayList. The code prints three integers, the number of instance of Student class, the number of instance of Trainer class, the number of instance of Hcl class.
+But some lines of the code are missing, and you have to fix it by modifying only  lines! Don't add, delete or modify any extra line.
+Problem:
+import java.util.*;
+class Student{}
+class Trainer{ }
+class Hcl{}
+public class DemonistrateKeyWord{
+	static String count(ArrayList mylist){
+		int a = 0,b = 0,c = 0;
+		for(int i = 0; i < mylist.size(); i++){
+			Object element=mylist.get(i);
+			if(element instanceof Student  ) a++;
+			if(element instanceof Trainer ) b++;
+			if(element instanceof Hcl) c++;
+		}String ret = Integer.toString(a)+" "+
+				Integer.toString(b)+" "+ Integer.toString(c);
+		return ret;
+	}
+	public static void main(String []args){
+		ArrayList mylist = new ArrayList();
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		for(int i=0; i<t; i++){
+			String s=sc.next();
+			if(s.equals("Student"))
+				mylist.add(new Student());
+			if(s.equals("Trainer"))
+				mylist.add(new Trainer());
+			if(s.equals("Hcl"))
+				mylist.add(new Hcl());
+		}
+		System.out.println(count(mylist));
+	}
+}
+
+
+
+Output:
+ 
+
+
+
+
+
+9.
+Program:
+import java.util.*; 
+abstract class Book{
+	String title;
+	abstract void setTitle(String s);                
+	String getTitle()
+	{                          
+		return title;
+	} 
+}
+//Write MyBook class here
+class MyBook extends Book{
+	void setTitle(String s)
+	{
+		title=s;
+	}
+}
+public class Main{            
+	public static void main(String []args){
+		//Book new_novel=new Book(); //This line prHMain.java:25: error: Book is abstract; cannot be instantiated
+		Scanner sc=new Scanner(System.in);
+		String title=sc.nextLine();
+		MyBook new_novel=new MyBook();
+		new_novel.setTitle(title);
+		System.out.println("The title is: "+new_novel.getTitle());     
+		sc.close();
+	}
+}
+Output:
+ 
+10.
+Program:
+import java.util.*; 
+import java.io.*; 
+class BiCycle{
+	String define_me(){                  
+		return "a vehicle with pedals.";
+	}
+}
+class MotorCycle extends BiCycle{
+	String define_me(){
+		return "a cycle with an engine.";
+	}
+	MotorCycle(){
+		System.out.println("Hello I am a "+" motorcycle, I am "+ define_me());
+		String temp=super.define_me(); //Fix this line
+		System.out.println("My ancestor is a cycle "+"who is "+ temp );
+	}
+}
+class Solution{
+	public static void main(String []args){
+		MotorCycle M=new MotorCycle();
+	}
+}
+Output:
+ 
+
